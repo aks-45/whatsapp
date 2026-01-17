@@ -2,7 +2,7 @@ services:
   - type: web
     name: whatsapp-sender
     env: node
-    buildCommand: npm install
+    buildCommand: npm install && npm run build
     startCommand: node server.js
     envVars:
       - key: PORT

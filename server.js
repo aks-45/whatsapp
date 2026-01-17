@@ -2,12 +2,20 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import axios from 'axios'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const app = express()
 const PORT = process.env.PORT || 3001
 
 app.use(cors())
 app.use(express.json())
+
+// Serve static files from dist folder
+app.use(express.static(path.join(__dirname, 'dist')))
 
 async function sendMessage(message, phoneNumber) {
     try {
@@ -48,6 +56,11 @@ app.post('/api/send-whatsapp', async (req, res) => {
     }
     
     res.json({ results })
+})
+
+// Serve React app for all other routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
 app.listen(PORT, () => {
