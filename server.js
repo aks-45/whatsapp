@@ -14,8 +14,10 @@ const PORT = process.env.PORT || 3001
 app.use(cors())
 app.use(express.json())
 
-// Serve static files from dist folder
-app.use(express.static(path.join(__dirname, 'dist')))
+// Serve static files from dist folder (if exists)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'dist')))
+}
 
 async function sendMessage(message, phoneNumber) {
     try {
@@ -58,9 +60,13 @@ app.post('/api/send-whatsapp', async (req, res) => {
     res.json({ results })
 })
 
-// Serve React app for all other routes
+// Serve React app for all other routes (production only)
 app.get('*', (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+  } else {
+    res.json({ message: 'WhatsApp API Server Running', endpoints: ['/api/send-whatsapp'] })
+  }
 })
 
 app.listen(PORT, () => {
