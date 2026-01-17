@@ -42,7 +42,7 @@ const BulkWhatsAppForm = () => {
         phone.replace(/[\s\-()]/g, "").replace(/^\+/, "")
       );
 
-      const response = await fetch('http://localhost:3001/api/send-whatsapp', {
+      const response = await fetch('https://whatsapp-xqfw.onrender.com/api/send-whatsapp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
