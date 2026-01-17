@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 180 20% 98%;
+    --foreground: 180 40% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 180 40% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 180 40% 15%;
+
+    --primary: 174 62% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 199 89% 94%;
+    --secondary-foreground: 180 40% 25%;
+
+    --muted: 180 15% 95%;
+    --muted-foreground: 180 10% 45%;
+
+    --accent: 152 60% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 152 60% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 180 20% 88%;
+    --input: 180 20% 92%;
+    --ring: 174 62% 40%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Healthcare gradient */
+    --gradient-healthcare: linear-gradient(135deg, hsl(174 62% 40%) 0%, hsl(180 55% 50%) 100%);
+    --gradient-soft: linear-gradient(180deg, hsl(180 20% 98%) 0%, hsl(180 25% 95%) 100%);
+    
+    /* Shadows */
+    --shadow-card: 0 4px 24px -4px hsl(180 30% 50% / 0.12);
+    --shadow-button: 0 4px 14px -3px hsl(174 62% 40% / 0.35);
+    --shadow-input-focus: 0 0 0 3px hsl(174 62% 40% / 0.15);
+  }
+
+  .dark {
+    --background: 180 30% 8%;
+    --foreground: 180 15% 95%;
+
+    --card: 180 25% 12%;
+    --card-foreground: 180 15% 95%;
+
+    --popover: 180 25% 12%;
+    --popover-foreground: 180 15% 95%;
+
+    --primary: 174 62% 50%;
+    --primary-foreground: 180 40% 10%;
+
+    --secondary: 180 30% 18%;
+    --secondary-foreground: 180 15% 90%;
+
+    --muted: 180 25% 18%;
+    --muted-foreground: 180 10% 60%;
+
+    --accent: 152 55% 50%;
+    --accent-foreground: 180 40% 10%;
+
+    --destructive: 0 62.8% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 152 55% 50%;
+    --success-foreground: 180 40% 10%;
+
+    --border: 180 25% 20%;
+    --input: 180 25% 18%;
+    --ring: 174 62% 50%;
+
+    --shadow-card: 0 4px 24px -4px hsl(0 0% 0% / 0.4);
+    --shadow-button: 0 4px 14px -3px hsl(174 62% 50% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer components {
+  .healthcare-card {
+    @apply bg-card rounded-2xl p-6 md:p-8;
+    box-shadow: var(--shadow-card);
+  }
+
+  .healthcare-input {
+    @apply bg-input border-border rounded-xl px-4 py-3 transition-all duration-200;
+  }
+
+  .healthcare-input:focus {
+    @apply border-primary outline-none;
+    box-shadow: var(--shadow-input-focus);
+  }
+
+  .healthcare-button {
+    @apply rounded-xl font-semibold transition-all duration-200;
+    box-shadow: var(--shadow-button);
+  }
+
+  .healthcare-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .healthcare-button:active {
+    transform: translateY(0);
+  }
+
+  .healthcare-button:disabled {
+    @apply opacity-70 cursor-not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .gradient-text {
+    background: var(--gradient-healthcare);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+}
